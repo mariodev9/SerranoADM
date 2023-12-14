@@ -4,8 +4,7 @@
     "dev": "next dev",
     "build": "yarn setup && next build",
     "start": "next start",
-    "lint": "next lint",
-    "setup": "NODE_OPTIONS='--experimental-json-modules' node ./scripts/setup.mjs"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.4",
