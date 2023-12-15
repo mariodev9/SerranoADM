@@ -68,15 +68,12 @@ export default function AccountingItemTable({
 
   async function DeleteAccount() {
     try {
-      const response = await fetch(
-        `${process.env.BASE_URI}api/transactions/${_id}`,
-        {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const response = await fetch(`/api/transactions/${_id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
         }
-      );
+      });
 
       if (response.ok) {
         toast({

@@ -1,14 +1,14 @@
-import { Th, TableContainer, Thead, Tr, Table, Tbody } from "@chakra-ui/react";
-import React from "react";
+import { Th, TableContainer, Thead, Tr, Table, Tbody } from '@chakra-ui/react';
+import React from 'react';
 
 export default function DataTable({ children, headers }) {
   const ThCustomize = ({ children }) => (
     <Th
-      textTransform={"capitalize"}
-      fontFamily={"inter"}
-      fontSize={"0.9rem"}
-      fontWeight={400}
-      color={"main.200"}
+      textTransform={'capitalize'}
+      fontFamily={'inter'}
+      fontSize={'0.9rem'}
+      fontWeight={500}
+      color={'#000'}
     >
       {children}
     </Th>
@@ -17,12 +17,12 @@ export default function DataTable({ children, headers }) {
   return (
     <TableContainer
       mt={5}
-      border={"1px solid"}
-      borderColor={" main.100"}
-      borderRadius={"10px"}
+      border={'1px solid'}
+      borderColor={' main.100'}
+      borderRadius={'10px'}
     >
       <Table size="md">
-        <Thead bg={"#000"}>
+        <Thead bg={'main.200'}>
           <Tr>
             {headers.map((header) => (
               <ThCustomize key={header}>{header}</ThCustomize>

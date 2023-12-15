@@ -9,13 +9,13 @@ export default async (req, res) => {
 
     switch (req.method) {
       case 'GET':
-        const accounting = await db
+        const transactions = await db
           .collection('accounting')
           .find({})
           .limit(parseInt(limitResponse))
           .toArray();
 
-        res.json(accounting);
+        res.json(transactions);
 
       case 'POST':
         const { title, price, type, date, client, additionalInfo } = req.body;
@@ -37,12 +37,16 @@ export default async (req, res) => {
         };
 
         // Insertar el nuevo objeto en la colección
-        await db.collection('accounting').insertOne(newEntry);
+        const newItem = await db.collection('accounting').insertOne(newEntry);
+        const newItemId = newItem.insertedId;
 
-        res.status(201).json(newEntry); // 201 significa creado con éxito
+        res.status(201).json({
+          _id: newItemId,
+          ...newEntry
+        });
         break;
       // case "PATCH":
-      //   return res.json({ message: "Todavia no hay PATCH" });
+      //   return res.json({ message: "PATCH no exist" });
       default:
         return res.status(405).send('Method not allowed');
     }

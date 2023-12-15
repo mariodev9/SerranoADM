@@ -64,9 +64,14 @@ export default async (req, res) => {
         };
 
         // Insertar el nuevo objeto en la colección
-        await db.collection('orders').insertOne(newEntry);
+        const newItem = await db.collection('orders').insertOne(newEntry);
+        const newItemId = newItem.insertedId;
 
-        res.status(201).json(newEntry); // 201 significa creado con éxito
+        res.status(201).json({
+          _id: newItemId,
+          ...newEntry
+        });
+
         break;
       default:
         return res.status(405).send('Method not allowed');
