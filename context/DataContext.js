@@ -13,7 +13,7 @@ export const AppProvider = ({ children }) => {
       .then((response) => response.json())
       .then((data) => setOrders(data));
 
-    fetch(`http://localhost:3000/api/transactions`)
+    fetch(`/api/transactions`)
       .then((response) => response.json())
       .then((data) => setTransactions(data));
   }, []);

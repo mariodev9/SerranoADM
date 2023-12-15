@@ -12,22 +12,6 @@ const headersTable = ['Titulo', 'Precio', 'Fecha', 'Tipo', ''];
 export default function AccountingPage() {
   const user = useUser();
 
-  const [accountings, setAccountings] = useState(null);
-
-  useEffect(() => {
-    fetch(`${process.env.BASE_URI}api/accounting`)
-      .then((response) => response.json())
-      .then((data) => setAccountings(data));
-  }, []);
-
-  // const ordersFinishes = orders?.filter(
-  //   (item) => item.status === "terminado"
-  // ).length;
-
-  // const ordersInProcess = orders?.filter(
-  //   (item) => item.status === "proceso"
-  // ).length;
-
   return (
     <>
       <Flex
