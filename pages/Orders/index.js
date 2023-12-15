@@ -26,7 +26,7 @@ export default function OrdersPage() {
   // const { totalOrders } = useAppContext();
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/orders')
+    fetch(`${process.env.BASE_URI}api/orders`)
       .then((response) => response.json())
       .then((data) => setOrders(data));
   }, []);

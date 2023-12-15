@@ -69,7 +69,7 @@ export default function AccountingItemTable({
   async function DeleteAccount() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/transactions/${_id}`,
+        `${process.env.BASE_URI}api/transactions/${_id}`,
         {
           method: 'DELETE',
           headers: {

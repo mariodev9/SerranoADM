@@ -15,7 +15,7 @@ export default function AccountingPage() {
   const [accountings, setAccountings] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/accounting')
+    fetch(`${process.env.BASE_URI}api/accounting`)
       .then((response) => response.json())
       .then((data) => setAccountings(data));
   }, []);

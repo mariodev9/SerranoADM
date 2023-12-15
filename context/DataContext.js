@@ -9,11 +9,11 @@ export const AppProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/orders')
+    fetch(`/api/orders`)
       .then((response) => response.json())
       .then((data) => setOrders(data));
 
-    fetch('http://localhost:3000/api/transactions')
+    fetch(`http://localhost:3000/api/transactions`)
       .then((response) => response.json())
       .then((data) => setTransactions(data));
   }, []);

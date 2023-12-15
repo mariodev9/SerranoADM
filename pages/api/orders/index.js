@@ -1,7 +1,18 @@
 import clientPromise from '../../../lib/mongodb';
+import Cors from 'cors';
+import initMiddleware from '../../../lib/init-middleware';
+
+// Inicializa el middleware CORS
+const cors = initMiddleware(
+  Cors({
+    methods: ['GET', 'POST', 'OPTIONS']
+  })
+);
 
 export default async (req, res) => {
   try {
+    await cors(req, res);
+
     const client = await clientPromise;
     const db = client.db('serrano');
 
