@@ -62,29 +62,6 @@ export default function Layout({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  const theme = extendTheme({
-    // fonts: {
-    //   inter: inter.style.fontFamily,
-    // },
-    colors: {
-      main: {
-        100: '#d8d8d8',
-        200: '#eff1f2'
-      }
-    },
-    layerStyles: {
-      headerSection: {
-        py: '10px',
-        mb: '20px'
-      },
-      tableBox: {
-        border: '1px solid',
-        borderColor: 'main.100',
-        borderRadius: '20px'
-      }
-    }
-  });
-
   const handleLogOut = () => {
     logOut();
   };
@@ -94,33 +71,84 @@ export default function Layout({ children }) {
   };
 
   return (
-    <ChakraProvider theme={theme}>
-      <AppProvider>
-        <Flex
-          direction={{ base: 'column', md: 'row' }}
-          bgGradient={'linear(to-r, #fff, main.100)'}
-          fontFamily="inter"
-        >
-          {/* DesktopNav */}
-          {isLargerThan768 ? (
+    <AppProvider>
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        bgGradient={'linear(to-r, #fff, main.100)'}
+        fontFamily="inter"
+      >
+        {/* DesktopNav */}
+        {isLargerThan768 ? (
+          <Flex
+            w={{ base: '100%', md: '20%' }}
+            // border={"1px solid red"}
+            h={'100vh'}
+          >
             <Flex
-              w={{ base: '100%', md: '20%' }}
               // border={"1px solid red"}
+              position={'fixed'}
+              direction={'column'}
+              justify={'space-between'}
               h={'100vh'}
+              p={'20px 10px'}
+              w={{ base: '100%', md: '20%' }}
             >
-              <Flex
-                // border={"1px solid red"}
-                position={'fixed'}
-                direction={'column'}
-                justify={'space-between'}
-                h={'100vh'}
-                p={'20px 10px'}
-                w={{ base: '100%', md: '20%' }}
-              >
-                <Flex direction={'column'} gap={5}>
-                  <Box pl={'10px'}>
-                    <LogoIcon />
-                  </Box>
+              <Flex direction={'column'} gap={5}>
+                <Box pl={'10px'}>
+                  <LogoIcon />
+                </Box>
+                <Flex direction={'column'}>
+                  {menuList.map((item) => (
+                    <Flex
+                      key={item.title}
+                      onClick={() => handleRedirect(item.href)}
+                      cursor={'pointer'}
+                      p={'8px 12px'}
+                      borderRadius={'10px'}
+                      gap={3}
+                      align={'center'}
+                      _hover={{ bg: 'main.100' }}
+                    >
+                      {item.icon}
+                      <Text fontWeight={600} fontSize={''}>
+                        {item.title}
+                      </Text>
+                    </Flex>
+                  ))}
+                </Flex>
+              </Flex>
+
+              <Flex cursor={'pointer'} onClick={handleLogOut} gap={3}>
+                <LogoutIcon />
+                <Text>Cerrar sesion</Text>
+              </Flex>
+            </Flex>
+          </Flex>
+        ) : (
+          <Flex
+            p={'5px 10px'}
+            h={'50px'}
+            justify={'space-between'}
+            align={'center'}
+          >
+            <LogoIcon />
+            <Button ref={btnRef} onClick={onOpen}>
+              <MenuIcon />
+            </Button>
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              onClose={onClose}
+              finalFocusRef={btnRef}
+            >
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader>
+                  <LogoIcon />
+                </DrawerHeader>
+
+                <DrawerBody>
                   <Flex direction={'column'}>
                     {menuList.map((item) => (
                       <Flex
@@ -140,80 +168,27 @@ export default function Layout({ children }) {
                       </Flex>
                     ))}
                   </Flex>
-                </Flex>
+                </DrawerBody>
 
-                <Flex cursor={'pointer'} onClick={handleLogOut} gap={3}>
-                  <LogoutIcon />
-                  <Text>Cerrar sesion</Text>
-                </Flex>
-              </Flex>
-            </Flex>
-          ) : (
-            <Flex
-              p={'5px 10px'}
-              h={'50px'}
-              justify={'space-between'}
-              align={'center'}
-            >
-              <LogoIcon />
-              <Button ref={btnRef} onClick={onOpen}>
-                <MenuIcon />
-              </Button>
-              <Drawer
-                isOpen={isOpen}
-                placement="right"
-                onClose={onClose}
-                finalFocusRef={btnRef}
-              >
-                <DrawerOverlay />
-                <DrawerContent>
-                  <DrawerCloseButton />
-                  <DrawerHeader>
-                    <LogoIcon />
-                  </DrawerHeader>
+                <DrawerFooter></DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </Flex>
+        )}
 
-                  <DrawerBody>
-                    <Flex direction={'column'}>
-                      {menuList.map((item) => (
-                        <Flex
-                          key={item.title}
-                          onClick={() => handleRedirect(item.href)}
-                          cursor={'pointer'}
-                          p={'8px 12px'}
-                          borderRadius={'10px'}
-                          gap={3}
-                          align={'center'}
-                          _hover={{ bg: 'main.100' }}
-                        >
-                          {item.icon}
-                          <Text fontWeight={600} fontSize={''}>
-                            {item.title}
-                          </Text>
-                        </Flex>
-                      ))}
-                    </Flex>
-                  </DrawerBody>
-
-                  <DrawerFooter></DrawerFooter>
-                </DrawerContent>
-              </Drawer>
-            </Flex>
-          )}
-
-          {/* Body Page */}
-          <Box
-            w={{ base: 'auto', md: '80%' }}
-            h={{ base: 'auto', md: '100%' }}
-            p={'10px 20px'}
-            borderRadius={'20px'}
-            border={'2px solid main.100'}
-            bg={'#fff'}
-            m={'10px'}
-          >
-            {children}
-          </Box>
-        </Flex>
-      </AppProvider>
-    </ChakraProvider>
+        {/* Body Page */}
+        <Box
+          w={{ base: 'auto', md: '80%' }}
+          h={{ base: 'auto', md: '100%' }}
+          p={'10px 20px'}
+          borderRadius={'20px'}
+          border={'2px solid main.100'}
+          bg={'#fff'}
+          m={'10px'}
+        >
+          {children}
+        </Box>
+      </Flex>
+    </AppProvider>
   );
 }
