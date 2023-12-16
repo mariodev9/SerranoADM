@@ -39,6 +39,14 @@ export const AppProvider = ({ children }) => {
     return Number(result);
   };
 
+  const ordersFinishes = orders?.filter(
+    (item) => item.status === 'terminado'
+  ).length;
+
+  const ordersInProcess = orders?.filter(
+    (item) => item.status === 'proceso'
+  ).length;
+
   const total = getTransactionsResume();
   const savings = getSavings();
 
@@ -49,7 +57,9 @@ export const AppProvider = ({ children }) => {
     transactions,
     setTransactions,
     transactionsResume: total,
-    transactionsSavings: savings
+    transactionsSavings: savings,
+    ordersFinishes,
+    ordersInProcess
     // Agrega otros valores o funciones globales según sea necesario
   };
 

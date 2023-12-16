@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react'
 import {Login, sessionChange} from "../firebase/services/auth"
 import { useRouter } from 'next/router'
 import useUser from "../hooks/useUser"
+import { LogoIcon } from '@/components/icons'
 
 
 type ConnectionStatus = {
@@ -47,9 +48,8 @@ export default function Home({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
    const USER_STATES = {
-    NOT_LOGGED: null,
-    NOT_KNOWN: undefined,
-    NOT_PROFILE: false,
+     NOT_KNOWN: undefined,
+     NOT_LOGGED: false,
     LOGGED: true,
   };
 
@@ -57,6 +57,8 @@ export default function Home({
 
 
   const [isLogin, setIsLogin] = useState(USER_STATES.NOT_KNOWN)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
 
   const handleLogin = (e:React.FormEvent<HTMLFormElement>) => {
@@ -64,8 +66,8 @@ export default function Home({
     e.preventDefault()
 
     let data = {
-      email: "luciano.mariotti99@gmail.com",
-      password: "ponelemasilla"
+      email,
+      password
     }
     Login(data, setError)
   }
@@ -90,28 +92,33 @@ export default function Home({
       <Box pos={"absolute"} left={0} top={0} w={"100vw"} h={"100vh"} bg={"#fff"}>
       <div className="container">
         <main >
-          <Container maxW={"2xl"} border={"2px solid red"}>
+          <Container maxW={"2xl"}>
             <Flex gap={3} direction={"column"} h={"100vh"} justify={"center"} align={"center"}>
-                <Text fontSize={"3rem"}>Bienvenido </Text>
-                <Text fontSize={"3rem"}>{isLogin ? "Esta logeado" : "No esta log"} </Text>
+                <LogoIcon/>
+                <Text fontSize={"1.5rem"} fontWeight={700}>Serrano Admin</Text>
+                {/* <Text fontSize={"3rem"}>{isLogin === USER_STATES.NOT_LOGGED && "nO LOG"  } </Text> */}
 
                 <form onSubmit={handleLogin}>
                 <VStack minW={"350px"} maxW={"600px"} spacing={5}>
 
                   <FormControl>
                     <FormLabel>Email</FormLabel>
-                    <Input type='email' />
+                    <Input 
+                      type='email' 
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </FormControl>
                   <FormControl>
                     <FormLabel>Contraseña</FormLabel>
-                    <Input type='password' />
+                    <Input 
+                      type='password' 
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
                   </FormControl>
                   <Button type='submit' w={"full"} bg={"#111"} color={"#fff"} _hover={{ bg:"#222" }}>Iniciar sesion</Button>
                   </VStack>
-
                 </form>
-
-                <Text>{error && "Hubo un error"}</Text>
+                <Text color={"red.400"} fontWeight={500}>{error && "Datos incorrectos"}</Text>
             </Flex>
           </Container> 
         </main>

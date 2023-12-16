@@ -18,26 +18,7 @@ const headersTable = [
 ];
 
 export default function OrdersPage() {
-  const user = useUser();
-  const toast = useToast();
-
-  const [orders, setOrders] = useState(null);
-
-  // const { totalOrders } = useAppContext();
-
-  useEffect(() => {
-    fetch(`/api/orders`)
-      .then((response) => response.json())
-      .then((data) => setOrders(data));
-  }, []);
-
-  const ordersFinishes = orders?.filter(
-    (item) => item.status === 'terminado'
-  ).length;
-
-  const ordersInProcess = orders?.filter(
-    (item) => item.status === 'proceso'
-  ).length;
+  const { totalOrders, ordersFinishes, ordersInProcess } = useAppContext();
 
   return (
     <>
@@ -55,11 +36,11 @@ export default function OrdersPage() {
             Pedidos totales:{' '}
           </Text>
           <Text as="span" fontWeight={600}>
-            {orders?.length}
+            {totalOrders}
           </Text>
         </Box>
 
-        <Flex gap={10}>
+        <Flex gap={10} mb={{ base: 5 }}>
           <Box>
             <Text fontSize={'2rem'} fontWeight={600}>
               {ordersFinishes}

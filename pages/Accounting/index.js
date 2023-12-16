@@ -6,12 +6,13 @@ import DataTable from '../../components/common/DataTable';
 import AccountingItemTable from '../../components/accounting/AccountingItemTable';
 import CreateButton from '../../components/common/CreateButton';
 import AccountingTable from '../../components/accounting/AccountingTable';
+import { useAppContext } from '../../context/DataContext';
 
 const headersTable = ['Titulo', 'Precio', 'Fecha', 'Tipo', ''];
 
 export default function AccountingPage() {
   const user = useUser();
-
+  const { transactionsResume, transactionsSavings } = useAppContext();
   return (
     <>
       <Flex
@@ -27,14 +28,14 @@ export default function AccountingPage() {
             Ganancias totales:{' '}
           </Text>
           <Text as="span" fontWeight={600}>
-            123
+            ${transactionsResume}
           </Text>
         </Box>
 
-        <Flex gap={10}>
+        <Flex gap={10} mb={{ base: 5 }}>
           <Box>
             <Text fontSize={'2rem'} fontWeight={600}>
-              123
+              ${transactionsSavings}
             </Text>
             <Text color={'gray.500'}>Ahorros Serranos</Text>
           </Box>
