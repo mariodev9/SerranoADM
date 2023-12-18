@@ -41,7 +41,7 @@ export default function AccountingPage() {
           </Box>
           <Box>
             <Text fontSize={'2rem'} fontWeight={600}>
-              123
+              -
             </Text>
             <Text color={'gray.500'}>Ganancia ultima semana</Text>
           </Box>

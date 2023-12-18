@@ -70,6 +70,22 @@ export default function Layout({ children }) {
     router.push(href);
   };
 
+  const LogOutButton = () => (
+    <Flex
+      cursor={'pointer'}
+      ml={5}
+      fontWeight={600}
+      onClick={handleLogOut}
+      gap={3}
+      align={'center'}
+      fill={'#000'}
+      _hover={{ color: 'red.400', fill: 'red.400' }}
+    >
+      <LogoutIcon />
+      <Text>Cerrar sesion</Text>
+    </Flex>
+  );
+
   return (
     <AppProvider>
       <Flex
@@ -118,10 +134,7 @@ export default function Layout({ children }) {
                 </Flex>
               </Flex>
 
-              <Flex cursor={'pointer'} onClick={handleLogOut} gap={3}>
-                <LogoutIcon />
-                <Text>Cerrar sesion</Text>
-              </Flex>
+              <LogOutButton />
             </Flex>
           </Flex>
         ) : (
@@ -170,7 +183,9 @@ export default function Layout({ children }) {
                   </Flex>
                 </DrawerBody>
 
-                <DrawerFooter></DrawerFooter>
+                <DrawerFooter>
+                  <LogOutButton />
+                </DrawerFooter>
               </DrawerContent>
             </Drawer>
           </Flex>
