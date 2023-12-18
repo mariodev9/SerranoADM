@@ -2,9 +2,12 @@ import { Box, Button, Flex, Spinner, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import useUser from '../../hooks/useUser';
 
 export default function OrderItemPage() {
   const router = useRouter();
+  const user = useUser();
+
   const { id } = router.query;
 
   const [order, setOrder] = useState(null);

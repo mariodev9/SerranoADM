@@ -63,6 +63,7 @@ export default function Layout({ children }) {
   const btnRef = React.useRef();
 
   const handleLogOut = () => {
+    router.push('/');
     logOut();
   };
 

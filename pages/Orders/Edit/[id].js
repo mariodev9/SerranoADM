@@ -15,9 +15,12 @@ import {
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../../context/DataContext';
+import useUser from '../../../hooks/useUser';
 
 export default function EditOrderItemPage() {
   const router = useRouter();
+  const user = useUser();
+
   const { id } = router.query;
 
   const toast = useToast();

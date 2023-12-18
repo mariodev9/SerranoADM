@@ -1,9 +1,11 @@
 import { Flex, Spinner, Text, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import useUser from '../../hooks/useUser';
 
 export default function TransactionItemPage() {
   const router = useRouter();
+  const user = useUser();
   const { id } = router.query;
 
   const [transaction, setTransaction] = useState(null);
