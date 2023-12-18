@@ -3,8 +3,12 @@ import { Grid, GridItem, Text } from '@chakra-ui/react';
 import { useAppContext } from '../../context/DataContext';
 
 export default function Analytics() {
-  const { transactionsResume, transactionsSavings, totalOrders } =
-    useAppContext();
+  const {
+    transactionsResume,
+    transactionsSavings,
+    totalOrders,
+    ordersFinishes
+  } = useAppContext();
 
   return (
     <Grid
@@ -49,7 +53,9 @@ export default function Analytics() {
         py={3}
         px={6}
       >
-        <Text fontSize={{ base: '1.1rem', md: '1.5rem' }}>{totalOrders}</Text>
+        <Text fontSize={{ base: '1.1rem', md: '1.5rem' }}>
+          {ordersFinishes}
+        </Text>
         <Text fontSize={{ base: '0.8rem', md: '1rem' }} color={'main.100'}>
           Pedidos entregados
         </Text>
@@ -62,9 +68,9 @@ export default function Analytics() {
         py={3}
         px={6}
       >
-        <Text fontSize={{ base: '1.1rem', md: '1.5rem' }}>100k</Text>
+        <Text fontSize={{ base: '1.1rem', md: '1.5rem' }}>{totalOrders}</Text>
         <Text fontSize={{ base: '0.8rem', md: '1rem' }} color={'main.100'}>
-          Ganancias ultima semana
+          Pedidos totales
         </Text>
       </GridItem>
     </Grid>
