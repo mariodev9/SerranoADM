@@ -42,6 +42,7 @@ export default function TransactionItemPage() {
           <Text>Tipo: {transaction.type}</Text>
           <Text>Titulo: {transaction.title}</Text>
           <Text>Precio: {transaction.price}</Text>
+          <Text>Descripcion: {transaction.additionalInfo}</Text>
         </VStack>
       )}
     </div>
