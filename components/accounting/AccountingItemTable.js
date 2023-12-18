@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import {
   DeleteIcon,
+  DetailsIcon,
   DoneIcon,
   EarningIcon,
   EditIcon,
@@ -25,6 +26,7 @@ import {
 } from '../icons/index';
 import IconCell from '../common/IconCell';
 import { useRef } from 'react';
+import { useRouter } from 'next/router';
 
 export default function AccountingItemTable({
   _id,
@@ -63,6 +65,7 @@ export default function AccountingItemTable({
   };
 
   const toast = useToast();
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
@@ -126,7 +129,13 @@ export default function AccountingItemTable({
             <Button onClick={onOpen}>
               <DeleteIcon />
             </Button>
-            <EditIcon />
+            <Button onClick={() => router.push(`Accounting/Edit/${_id}`)}>
+              <EditIcon />
+            </Button>
+
+            <Button onClick={() => router.push(`Accounting/${_id}`)}>
+              <DetailsIcon />
+            </Button>
           </Flex>
         </Td>
       </Tr>

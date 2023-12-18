@@ -23,7 +23,7 @@ export const AppProvider = ({ children }) => {
     const result = transactions.reduce((total, transaction) => {
       const valor =
         transaction.type === 'entrada' ? transaction.price : -transaction.price;
-      return total + valor;
+      return total + Number(valor);
     }, 0);
 
     return Number(result);

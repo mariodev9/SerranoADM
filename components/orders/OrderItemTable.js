@@ -15,8 +15,15 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import React from 'react';
-import { DeleteIcon, DoneIcon, EditIcon, PendingIcon } from '../icons/index';
+import {
+  DeleteIcon,
+  DetailsIcon,
+  DoneIcon,
+  EditIcon,
+  PendingIcon
+} from '../icons/index';
 import IconCell from '../common/IconCell';
+import { useRouter } from 'next/router';
 
 export default function OrderItemTable({
   startDate,
@@ -30,6 +37,7 @@ export default function OrderItemTable({
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
+  const router = useRouter();
 
   async function DeleteOrder() {
     try {
@@ -103,7 +111,13 @@ export default function OrderItemTable({
             <Button onClick={onOpen}>
               <DeleteIcon />
             </Button>
-            <EditIcon />
+            <Button onClick={() => router.push(`Orders/Edit/${_id}`)}>
+              <EditIcon />
+            </Button>
+
+            <Button onClick={() => router.push(`Orders/${_id}`)}>
+              <DetailsIcon />
+            </Button>
           </Flex>
         </Td>
       </Tr>
