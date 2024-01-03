@@ -51,7 +51,7 @@ export default function CreateOrderPage() {
     // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a tu servidor o realizar validaciones.
     try {
       // Realiza la solicitud POST a la URL deseada
-      const response = await fetch('http://localhost:3000/api/orders', {
+      const response = await fetch('/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -200,7 +200,7 @@ export default function CreateOrderPage() {
           </FormControl>
 
           {/* Botón de Enviar */}
-          <Box>
+          <Box mt={10}>
             <Button type="submit" colorScheme="teal">
               Enviar
             </Button>
